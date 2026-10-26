@@ -34,11 +34,11 @@ def test_dataset_diagnostics_returns_dtypes():
     actual_dtypes = result['data_types']
     expected_dtypes = df.dtypes
     assert actual_dtypes.equals(expected_dtypes)
-    # .dtypes returns a pandas Series.
+    # .dtypes returns a panda Series.
     # Comparing two Series with == produces another Series of booleans,
     # not a single True/False value.
     # Series.equals() returns a single boolean indicating whether
-    # the Series have the same values and indices.
+    # the Series has the same values and indices.
 
 def test_dataset_diagnostics_memory_float_greater_than_zero():
     """Tests that the memory was returned as a float and a positive number."""
@@ -63,4 +63,4 @@ def test_dataset_diagnostics_empty_dataframe():
 def test_dataset_diagnostics_invalid_input():
     """Test for invalid input."""
     with pytest.raises(TypeError):
-        dataset_diagnostics("hello")
+        dataset_diagnostics("hello")  # pyright: ignore[reportArgumentType]
