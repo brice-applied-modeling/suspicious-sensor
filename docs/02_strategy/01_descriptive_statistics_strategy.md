@@ -12,54 +12,54 @@ This document defines the steps and strategy to be used and implemented to compl
 - The functions used to perform the analysis will be in the `src/utils/` folder.
 
 ### Utility Functions
-- Load Data
-- Dataset Inspection
-  - Shape
-  - Data Type
-  - Any missing data
-  - Duplications
-  - Memory usage
-    - how much RAM the dataframe consumes
-    - `df.memory_usage(deep=True)`
-    - `df.info(memory_usage='deep')`
-  - Unique values (select columns)
-  - Dataset validation checks
-    - Validate that dataset columns contain expected structures, values, and datatypes.
-    - are the columns present?
-    - are they spelled correctly?
-    - are the data types correct (ie: datestamp, float, etc.)
-  - **Validate Value Ranges**
-    - Example:
-      - pressure should not be:
-      - negative
-      - 9000 psi
-      - NaN everywhere
-  - **Timestamp Validation**
-    - Check:
-      - timestamps parse correctly,
-      - timestamps are ordered,
-      - timestamps are unique,
-      - timestamps are not missing.
-- Data Cleaning
-  - missing value handling
-  - datatype conversions
-  - timestamp parsing
-  - duplicate removal
-- Descriptive Statistics
-  - mean
-  - variance
-  - standard deviation
-- Visualizations
-  - histogram
-  - box plots
-  - distribution plots
-  - time series plots
-- Time Series Exploration
-  - pressure over time
-  - rolling mean
-  - rolling standard deviation
-  - Trend inspection
-  - excursion periods
+- [x] Load Data
+- [ ] Dataset Inspection
+  - [x] Shape
+  - [ ] Data Type
+  - [ ] Any missing data
+  - [ ] Duplications
+  - [ ] Memory usage
+    - [ ] how much RAM the dataframe consumes
+    - [ ] `df.memory_usage(deep=True)`
+    - [ ] `df.info(memory_usage='deep')`
+  - [ ] Unique values (select columns)
+  - [ ] Dataset validation checks
+    - [ ] Validate that dataset columns contain expected structures, values, and datatypes.
+    - [ ] are the columns present?
+    - [ ] are they spelled correctly?
+    - [ ] are the data types correct (ie: datestamp, float, etc.)
+  - [ ] **Validate Value Ranges**
+    - [ ] Example:
+      - [ ] pressure should not be:
+      - [ ] negative
+      - [ ] 9000 psi
+      - [ ] NaN everywhere
+  - [ ] **Timestamp Validation**
+    - [ ] Check:
+      - [ ] timestamps parse correctly,
+      - [ ] timestamps are ordered,
+      - [ ] timestamps are unique,
+      - [ ] timestamps are not missing.
+- [ ] Data Cleaning
+  - [ ] missing value handling
+  - [ ] datatype conversions
+  - [ ] timestamp parsing
+  - [ ] duplicate removal
+- [ ] Descriptive Statistics
+  - [ ] mean
+  - [ ] variance
+  - [ ] standard deviation
+- [ ] Visualizations
+  - [ ] histogram
+  - [ ] box plots
+  - [ ] distribution plots
+  - [ ] time series plots
+- [ ] Time Series Exploration
+  - [ ] pressure over time
+  - [ ] rolling mean
+  - [ ] rolling standard deviation
+  - [ ] Trend inspection
+  - [ ] excursion periods
 
 ## Notebook Structure
 1. Import Libraries
