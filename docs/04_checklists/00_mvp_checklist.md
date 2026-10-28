@@ -20,16 +20,16 @@ structure and utility component strategy.
 - [ ] Unit test written and passing
 
 ### Dataset Validation (`dataset_validation()`)
-- [ ] Validate expected columns are present and correctly named
-- [ ] Validate column data types (timestamp → datetime, pressure_psi → float, etc.)
-- [ ] Validate value ranges (pressure_psi: non-negative, realistic bounds)
-- [ ] Validate timestamp ordering, uniqueness, and completeness
+- [x] Validate expected columns are present and correctly named
+- [x] Validate column data types (timestamp → datetime, pressure_psi → float, etc.)
+- [x] Validate value ranges (pressure_psi: non-negative, realistic bounds)
+- [x] Validate timestamp ordering, uniqueness, and completeness
 - [ ] Unit test written and passing
 
 ### Data Cleaning
 - [ ] Missing value handling utility implemented
 - [ ] Timestamp parsing and conversion implemented
-- [ ] Duplicate record removal implemented
+- [x] Duplicate record removal implemented
 - [ ] Data type conversion utility implemented
 
 ---
