@@ -10,50 +10,6 @@ records could bias pressure statistics or operational-risk conclusions.
 import pandas as pd
 
 
-def dataset_validation(df: pd.DataFrame) -> dict:
-    """
-    Ingests DataFrame and performs dataset validation, then returns findings in a dictionary.
-
-    Args
-    ----
-        df (pd.DataFrame):
-            DataFrame containing pressure sensor readings.
-
-    Return
-    ------
-        dict
-            Dictionary containing validation results for:
-                structure
-                data_type
-                value_range
-                timestamp_validation
-
-    Raises
-    ------
-        TypeError:
-            If the input is not a pandas DataFrame.
-
-    Notes
-    -----
-        This function is a scaffold for dataset validation checks. It returns a
-        structured dictionary so static type checkers and downstream notebook
-        code have a stable interface while detailed validation logic is added.
-    """
-    if not isinstance(df, pd.DataFrame):
-        raise TypeError(
-            f"Expected pandas DataFrame, got {type(df).__name__}."
-        )
-
-    validation_results = {
-        "structure": {},
-        "data_type": {},
-        "value_range": {},
-        "timestamp_validation": {},
-    }
-
-    return validation_results
-
-
 def missing_data_investigation(
     df: pd.DataFrame,
     pressure_col: str = "pressure_psi",
@@ -395,3 +351,110 @@ def _build_risk_note(
         "time clusters. If they do, excluding them could understate pressure "
         "excursions or operational risk."
     )
+
+def summarize_missing_data(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Summarize missing data in the DataFrame.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame to summarize.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame containing the count and percentage of missing values for each column.
+    """
+    total_records = len(df)
+    missing_counts = df.isna().sum()
+    missing_percentages = (missing_counts / total_records) * 100
+
+    summary_df = pd.DataFrame({
+        'missing_count': missing_counts,
+        'missing_percentage': missing_percentages
+    }).sort_values(by='missing_percentage', ascending=False)
+
+    return summary_df
+
+def duplicate_rows_summary(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Summarize duplicate rows in the DataFrame.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame to summarize.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame containing the count of duplicate rows and their percentage.
+    """
+    total_records = len(df)
+    duplicate_mask = df.duplicated(keep=False)
+    duplicate_count = duplicate_mask.sum()
+    duplicate_percentage = (duplicate_count / total_records) * 100
+
+    summary_df = pd.DataFrame({
+        'duplicate_count': [duplicate_count],
+        'duplicate_percentage': [duplicate_percentage]
+    })
+
+    return summary_df
+
+def duplicate_rows_details(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Get details of duplicate rows in the DataFrame.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame to analyze.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame containing the duplicate rows.
+    """
+    duplicate_mask = df.duplicated(keep=False)
+    duplicate_rows = df[duplicate_mask].copy()
+
+    return duplicate_rows
+
+def get_duplicate_rows(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Get all duplicate rows in the DataFrame.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame to analyze.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame containing all duplicate rows.
+    """
+    duplicate_rows = df[df.duplicated(keep=False)].copy()
+
+    return duplicate_rows
+
+def drop_duplicate_rows(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Drop duplicate rows from the DataFrame.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame to clean.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with duplicate rows removed.
+    """
+    cleaned_df = df.drop_duplicates(keep='first').reset_index(drop=True)
+
+    return cleaned_df
+
