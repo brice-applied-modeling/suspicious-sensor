@@ -29,7 +29,7 @@ structure and utility component strategy.
 ### Data Cleaning
 - [ ] Missing value handling utility implemented
 - [ ] Timestamp parsing and conversion implemented
-- [ ] Duplicate record removal implemented
+- [x] Duplicate record removal implemented
 - [ ] Data type conversion utility implemented
 
 ---
