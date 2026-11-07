@@ -1,10 +1,11 @@
+
 # Suspicious Sensor Analysis
 *A Probability, Statistics, and Monte Carlo Engineering Exercise*
 
-![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
+![Python](https://img.shields.io/badge/python-3.12+-blue.svg)
 ![Version](https://img.shields.io/badge/version-0.1.0-blue)
 ![Status](https://img.shields.io/badge/status-active%20development-orange)
-![Focus](https://img.shields.io/badge/focus-probability%20%7C%20statistics%20%7C%20MCMC-informational)
+![Focus](https://img.shields.io/badge/focus-probability%20%7C%20statistics%20%7C%20simulation-informational)
 ![Simulation](https://img.shields.io/badge/simulation-Monte%20Carlo-darkgreen)
 ![Domain](https://img.shields.io/badge/domain-infrastructure%20analytics-critical)
 ![Math](https://img.shields.io/badge/math-statistics%20%26%20bayesian%20reasoning-purple)
@@ -23,7 +24,7 @@ Primary areas of investigation include:
 - Z-scores and statistical anomaly detection
 - Probability distributions and threshold exceedances
 - Monte Carlo simulation
-- Bayesian parameter estimation and uncertainty
+- Bayesian reasoning about parameter uncertainty (optional implementation)
 - Engineering interpretation of sensor observations
 
 The long-term objective is to establish a reproducible analytical workflow that translates sensor measurements into defensible engineering observations and risk-informed decisions.
@@ -96,7 +97,9 @@ The synthetic dataset includes:
 - High-pressure anomalies
 - Potential outlier conditions
 
-The dataset is designed to represent realistic analytical challenges, including noisy observations and changing operating conditions.
+The dataset contains **4,340 synthetic telemetry observations** with six fields: `timestamp`, `pressure_psi`, `flow_gpm`, `sensor_status`, `pump_status`, and `anomaly_flag`. It includes normal, drifting, frozen, and offline sensor conditions, along with missing pressure readings and duplicate-record challenges.
+
+The dataset is designed to represent realistic analytical challenges, including noisy observations and changing operating conditions. See [Dataset Documentation](docs/00_overview/02_data.md) for definitions and generation assumptions.
 
 Because the dataset is synthetic, results demonstrate analytical methods rather than establish actual infrastructure performance or reliability.
 
@@ -165,7 +168,7 @@ Methods include:
 
 Simulation results must distinguish between variability in pressure observations and uncertainty in estimated model parameters.
 
-### 4. Bayesian and MCMC Methods
+### 4. Bayesian Reasoning and Optional MCMC Methods
 
 Explore probabilistic inference and parameter uncertainty.
 
@@ -179,6 +182,12 @@ Potential methods include:
 - Posterior predictive analysis
 
 Advanced Bayesian and MCMC methods are considered future enhancements unless explicitly included in the initial release scope.
+
+---
+
+## Project Architecture
+
+The repository layout, module responsibilities, and directory conventions are maintained in [Project Structure](docs/01_architecture/01_structure.md). That document is the source of truth for the project tree; the README intentionally does not duplicate it.
 
 ---
 
@@ -203,78 +212,35 @@ Each analytical stage should produce reproducible outputs suitable for technical
 
 ## Development Roadmap
 
-The following milestones define the proposed path toward the initial stable release. Completion should be recorded only after implementation and validation.
+The project is organized into seven phases. The [MVP Checklist](docs/02_strategy/00_mvp_checklist.md) tracks detailed implementation and testing tasks; notebook names below identify the intended analytical deliverables.
 
-### v0.1.0 — Project Foundation
+| Phase | Focus | Primary notebook |
+|---|---|---|
+| 1 | Data infrastructure, validation, and preprocessing | `notebooks/01_exploratory_data_analysis.ipynb` |
+| 2 | Exploratory data analysis, descriptive statistics, and z-scores | `notebooks/01_exploratory_data_analysis.ipynb` |
+| 3 | Probability analysis and threshold exceedances | `notebooks/02_probability_analysis.ipynb` |
+| 4 | Monte Carlo simulation and uncertainty | `notebooks/03_monte_carlo_simulation.ipynb` |
+| 5 | Bayesian reasoning; implementation optional | `notebooks/04_bayesian_estimation.ipynb` (optional) |
+| 6 | Engineering interpretation | `notebooks/05_engineering_interpretation.ipynb` |
+| 7 | Final validation, reproducibility, and release | All required notebooks |
 
-- [ ] Establish repository structure.
-- [ ] Document the engineering scenario.
-- [ ] Define and document the synthetic dataset.
-- [ ] Establish Python dependencies.
-- [ ] Implement initial data ingestion.
-- [ ] Establish reproducible execution procedures.
+Core functionality is implemented in reusable Python modules and verified with automated tests as it is developed. The notebooks present the analysis, figures, assumptions, and engineering interpretation.
 
-### v0.2.0 — Exploratory Data Analysis
+**Current development:** Phase 1. Data loading, diagnostics, and portions of missing-data and duplicate analysis have been implemented. Dataset validation, preprocessing verification, and subsequent analytical phases remain in progress. The last reported test baseline was **14 passing tests**; this has not been independently rerun for this README update.
 
-- [ ] Validate data types and timestamps.
-- [ ] Evaluate missing values and duplicates.
-- [ ] Calculate descriptive statistics.
-- [ ] Visualize pressure observations over time.
-- [ ] Analyze the observed pressure distribution.
-- [ ] Document initial statistical findings.
+### Release Milestones
 
-### v0.3.0 — Probability and Anomaly Analysis
+| Version | Target |
+|---|---|
+| `v0.1.0` | Project foundation and initial data utilities |
+| `v0.2.0` | Validated exploratory analysis |
+| `v0.3.0` | Probability and anomaly analysis |
+| `v0.4.0` | Monte Carlo simulation |
+| `v0.5.0` | Engineering interpretation |
+| `v0.9.0` | Release candidate and reproducibility review |
+| `v1.0.0` | Initial stable release |
 
-- [ ] Implement z-score analysis.
-- [ ] Evaluate distribution assumptions.
-- [ ] Identify potential pressure anomalies.
-- [ ] Calculate pressure threshold exceedance probabilities.
-- [ ] Compare observed behavior against baseline assumptions.
-- [ ] Document statistical and engineering limitations.
-
-### v0.4.0 — Monte Carlo Simulation
-
-- [ ] Define the simulation model and assumptions.
-- [ ] Implement reproducible random sampling.
-- [ ] Estimate pressure exceedance probabilities.
-- [ ] Evaluate simulation convergence.
-- [ ] Quantify estimation uncertainty.
-- [ ] Perform sensitivity analysis.
-- [ ] Visualize simulation results.
-
-### v0.5.0 — Engineering Interpretation
-
-- [ ] Establish an engineering interpretation framework.
-- [ ] Distinguish statistical anomalies from operational concerns.
-- [ ] Evaluate pressure excursion frequency and severity.
-- [ ] Identify potential monitoring or investigation needs.
-- [ ] Document assumptions and limitations.
-- [ ] Summarize engineering findings.
-
-### v0.9.0 — Release Candidate
-
-- [ ] Review the complete analytical workflow.
-- [ ] Validate calculations against independent reference results.
-- [ ] Implement automated tests for core calculations.
-- [ ] Verify reproducibility using a clean environment.
-- [ ] Complete technical documentation.
-- [ ] Review figures, tables, and conclusions.
-- [ ] Resolve release-blocking issues.
-
-### v1.0.0 — Initial Stable Release
-
-The initial stable release will be considered complete when:
-
-- [ ] The full analytical workflow executes successfully.
-- [ ] Statistical and simulation methods have been validated.
-- [ ] Results can be reproduced using documented procedures.
-- [ ] Engineering findings are clearly presented.
-- [ ] Assumptions and limitations are documented.
-- [ ] Automated tests pass.
-- [ ] README and release documentation are complete.
-- [ ] A Git release tag has been created.
-
-**Version 1.0.0 represents completion of the initial analytical project, not the end of future development.**
+These are planned milestones, not claims that the corresponding releases have been completed.
 
 ---
 
@@ -298,7 +264,7 @@ Future development should be evaluated based on its analytical value rather than
 
 ---
 
-## Suggested Python Libraries
+## Python Libraries
 
 Core analytical libraries may include:
 
@@ -352,7 +318,7 @@ Actual project dependencies should be maintained in the project's dependency con
 
 The project will prioritize reproducibility and analytical validation.
 
-Testing should address:
+Automated tests are developed alongside the corresponding modules. Testing should address:
 
 - Input data validation
 - Statistical calculation accuracy
@@ -369,7 +335,7 @@ Analytical conclusions should distinguish model assumptions, simulation estimate
 
 ## Release Management
 
-Each completed milestone should be associated with an appropriate Git version tag.
+Completed release milestones may be associated with Git version tags after review.
 
 Example:
 
