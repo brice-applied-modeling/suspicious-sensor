@@ -353,7 +353,7 @@
 
 ### 7.3 Project Documentation
 
-- [ ] Update `README.md` with project purpose, setup, execution order, and key findings.
+- [ ] Update `../arch/README.md` with project purpose, setup, execution order, and key findings.
 - [ ] Ensure `docs/01_architecture/01_structure.md` reflects the actual repository.
 - [ ] Record material design and preprocessing decisions in the relevant architecture documents or notebooks.
 - [ ] Include a concise methods and limitations summary.
