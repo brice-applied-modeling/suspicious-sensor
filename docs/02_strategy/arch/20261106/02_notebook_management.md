@@ -8,15 +8,15 @@ This guide establishes consistent practices for developing, organizing, validati
 
 | Location | Responsibility |
 | --- | --- |
-| `notebooks/` | Exploratory analysis, presentation of results, plots, assumptions, and engineering interpretation |
-| `src/suspicious_sensor/io/` | Reusable data loading |
-| `src/suspicious_sensor/diagnostics/` | Diagnostics and validation |
-| `src/suspicious_sensor/preprocessing/` | Cleaning and transformations |
-| `src/suspicious_sensor/statistics/` | Reusable statistical calculations |
-| `src/suspicious_sensor/models/` | Reusable anomaly-detection and estimation models |
-| `src/suspicious_sensor/simulation/` | Reusable simulation logic |
-| `src/suspicious_sensor/visualization/` | Reusable plotting logic where warranted |
-| `tests/unit_tests/` | Tests for application functions |
+| `../../../../notebooks` | Exploratory analysis, presentation of results, plots, assumptions, and engineering interpretation |
+| `../../../../src/suspicious_sensor/io` | Reusable data loading |
+| `../../../../src/suspicious_sensor/diagnostics` | Diagnostics and validation |
+| `../../../../src/suspicious_sensor/preprocessing` | Cleaning and transformations |
+| `../../../../src/suspicious_sensor/statistics` | Reusable statistical calculations |
+| `../../../../src/suspicious_sensor/models` | Reusable anomaly-detection and estimation models |
+| `../../../../src/suspicious_sensor/simulation` | Reusable simulation logic |
+| `../../../../src/suspicious_sensor/visualization` | Reusable plotting logic where warranted |
+| `../../../../tests/unit_tests` | Tests for application functions |
 
 Simple, transparent one-line exploratory operations may remain in notebooks. Extract code when it is reused, requires substantial validation, or represents a stable analytical operation. Avoid creating utility functions solely to wrap basic pandas operations.
 
@@ -71,7 +71,7 @@ Include:
 - Z-scores, `|z| > 2` and `|z| > 3` counts, the `81 psi` question, and temporal clustering of unusual values (Part B).
 - Alignment of unusual values with `anomaly_flag`, used for comparison only.
 
-Follow the ten-section outline in `01_descriptive_statistics_strategy.md`.
+Follow the ten-section outline in `../../01_descriptive_statistics_strategy.md`.
 
 ### 02 — Baseline (`02_baseline_probability.ipynb`)
 
@@ -93,13 +93,13 @@ The baseline is the reference that every later model must beat or explain. Inclu
 Include:
 
 - Model candidates appropriate to the data, such as rolling-window z-scores, change-point detection, frozen-value detection, or pump-state-conditioned thresholds.
-- Feature definitions (rolling mean/std, rate of change, flow context), implemented in `src/` and tested.
+- Feature definitions (rolling mean/std, rate of change, flow context), implemented in `../../../../src` and tested.
 - A time-aware evaluation design: avoid random splits that leak adjacent hourly records.
 - Metrics against `anomaly_flag`, reported alongside the baseline scores from `02`.
 - Error analysis: which event types (high/low excursions, drift, frozen values) are missed or falsely flagged.
 - Justification for the chosen method, including its interpretability for operators.
 
-Model logic belongs in `src/suspicious_sensor/models/`; the notebook handles configuration, evaluation, and interpretation.
+Model logic belongs in `../../../../src/suspicious_sensor/models`; the notebook handles configuration, evaluation, and interpretation.
 
 ### 04 — Monte Carlo Simulation (`04_monte_carlo_simulation.ipynb`)
 
@@ -115,7 +115,7 @@ Include:
 - An optional scenario that simulates with parameters estimated from the observed data, to show the effect of model mismatch.
 - Discussion that separates Monte Carlo sampling error from uncertainty in the model assumptions.
 
-Simulation functions belong in `src/suspicious_sensor/simulation/`.
+Simulation functions belong in `../../../../src/suspicious_sensor/simulation`.
 
 ### 05 — Bayesian Estimation (`05_bayesian_estimation.ipynb`, optional)
 
@@ -160,7 +160,7 @@ For each numbered notebook, include:
 7. **Interpretation**: Explain what findings mean operationally, not just numerically.
 8. **Limitations and next steps**: Identify unresolved issues and decisions.
 
-The descriptive statistics notebook already has a ten-section plan in `01_descriptive_statistics_strategy.md`; follow that specific outline where applicable.
+The descriptive statistics notebook already has a ten-section plan in `../../01_descriptive_statistics_strategy.md`; follow that specific outline where applicable.
 
 ## Cell-Level Practices
 
@@ -179,7 +179,7 @@ The descriptive statistics notebook already has a ten-section plan in `01_descri
 2. Inspect the dataset and document relevant quality concerns.
 3. Prototype the smallest calculation or visualization in the notebook.
 4. Decide whether the logic is notebook-specific or reusable.
-5. If reusable, move the logic to the appropriate `src/suspicious_sensor/` module.
+5. If reusable, move the logic to the appropriate `../../../../src/suspicious_sensor` module.
 6. Write focused unit tests for that module, including meaningful edge cases.
 7. Import and call the tested function from the notebook.
 8. Explain the result and its engineering significance in Markdown.
@@ -188,7 +188,7 @@ The descriptive statistics notebook already has a ten-section plan in `01_descri
 
 ## Data Handling
 
-- Keep `data/raw/` unchanged.
+- Keep `../../../../data/raw` unchanged.
 - Store derived datasets under `data/processed/` when necessary.
 - Clearly label whether each result uses raw data, cleaned data, or both.
 - Document cleaning criteria, especially missing pressures, duplicate timestamps, non-`NORMAL` sensor states, and telemetry artifacts.
@@ -196,7 +196,7 @@ The descriptive statistics notebook already has a ten-section plan in `01_descri
 
 ## Testing and Validation
 
-**Unit tests:** Test functions in `src/` with pytest. Prefer small synthetic DataFrames for focused cases; use the project dataset for a limited number of integration-style checks.
+**Unit tests:** Test functions in `../../../../src` with pytest. Prefer small synthetic DataFrames for focused cases; use the project dataset for a limited number of integration-style checks.
 
 **Notebook checks:** Confirm imports work in the configured environment, cells execute sequentially after a kernel restart, outputs are consistent with stated assumptions, and no stale outputs contradict the current code.
 
@@ -204,7 +204,7 @@ The descriptive statistics notebook already has a ten-section plan in `01_descri
 
 ## Reproducibility and Version Control
 
-- Use the project's `pyproject.toml` and `uv.lock` to maintain a reproducible environment.
+- Use the project's `../../../../pyproject.toml` and `uv.lock` to maintain a reproducible environment.
 - Do not embed machine-specific absolute paths or secrets in notebooks.
 - Avoid committing unnecessary large outputs or generated datasets.
 - Review notebook diffs for accidental output churn before committing.
@@ -226,8 +226,8 @@ The descriptive statistics notebook already has a ten-section plan in `01_descri
 
 ## Relationship to Other Project Documents
 
-- `00_strategy_overview.md`: high-level component responsibilities.
-- `01_descriptive_statistics_strategy.md`: specific analytical sequence and scope.
+- `../../00_strategy_overview.md`: high-level component responsibilities.
+- `../../01_descriptive_statistics_strategy.md`: specific analytical sequence and scope.
 - `00_mvp_checklist.md`: tracks implementation and deliverable completion.
 - `01_structure.md`: documents repository layout.
 
