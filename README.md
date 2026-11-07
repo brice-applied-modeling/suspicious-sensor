@@ -212,7 +212,7 @@ Each analytical stage should produce reproducible outputs suitable for technical
 
 ## Development Roadmap
 
-The project is organized into seven phases. The [MVP Checklist](docs/02_strategy/00_mvp_checklist.md) tracks detailed implementation and testing tasks; notebook names below identify the intended analytical deliverables.
+The project is organized into seven phases. The [MVP Checklist](docs/04_checklists/00_mvp_checklist.md) tracks detailed implementation and testing tasks; notebook names below identify the intended analytical deliverables.
 
 | Phase | Focus | Primary notebook |
 |---|---|---|
